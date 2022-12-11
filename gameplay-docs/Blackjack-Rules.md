@@ -37,3 +37,16 @@ Jack of Diamonds, 10 of Spades are equal to 20 (10 + 10).
 9 of Spades, 3 of Spades, Queen of Hearts are equal to 22 (9 + 3 + 10), so this hand is a "bust".
 > **Any hand that goes over 21 "breaks", or is "busted", and is an automatic loser.**
 
+- An Ace can be counted as either 1 or 11. 
+	- You need not specify which value the Ace has. 
+	- It is assumed to have the value that makes the best hand, and that may change as more cards are added to the hand.
+- A soft hand is any hand where an Ace can be counted as either 1 or 11 without going over 21. 
+	- The name reflects the fact that the hand can't break if you draw another card. It's "soft".
+- If we no longer have the option to count the Ace as 11, because that would go over 21. 
+	- This hand would now be considered as a hard hard hand, despite having an Ace in it.
+
+<br>
+
+
+
+
