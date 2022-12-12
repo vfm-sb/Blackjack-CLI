@@ -51,3 +51,48 @@
 * No Clubs, Diamonds, Hearts, or Spades!
 * Just 52 Cards.
     * 4 Aces, 4 Kings, 4 Queens, 4 Jacks, and 4 of each Number Cards.
+
+<br>
+
+### Randomizing The Deck of Cards
+
+Shuffle Twice... (at Version 2)
+
+Use `random.shuffle(deck_of_cards)
+
+Create a `shuffle_deck()` Function
+- For the Version 1, it should shuffle only once, as the default value.
+
+### Dealing the Cards
+
+#### First Alternative (Complete Randomness)
+
+Even after shuffling the deck of card, pick the cards randomly.
+
+**Steps**:
+- Pick a card for the player. (Add it to Player's Hand)
+    - Use `random.choice(deck_of_cards)`
+    - Use `pop()` to retrieve and remove the card from the list.
+        > **Info**: `pop()` mehtod receives an int value which represents index.
+        1. Use `random.randint(0, len(deck_of_cards))
+        2. Use `random.randrange(len(deck_of_cards))
+- Pick a card for the dealer. (Add it to Dealer's Hand)
+    - Apply the same steps as above.
+- Pick a second card for the player.
+    - Apply the same steps as above.
+- And finally pick the second card for the dealer.
+    - Apply the same steps as above.
+
+#### Second Alternative(Pick the First or Last Card from the Deck)
+
+Just pick first or last cards from the deck of cards.
+
+**Steps**:
+- Pick a card for the player.
+    - Use `pop(0)` or `pop(-1)` to retrieve and remove the card from the list.
+- Then a card for the dealer.
+    - Same steps as above.
+- Second card for the player.
+    - Same steps as above.
+- Pick the second card for the dealer.
+    - Same steps as above.
