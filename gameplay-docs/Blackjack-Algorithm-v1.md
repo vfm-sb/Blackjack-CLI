@@ -114,3 +114,27 @@ Just pick first or last cards from the deck of cards.
 
 Options: "hit" or "stand"
 
+If "hit" is chosen, the player receives another card.
+    - Check if player's hand is more than 21 or not.
+        - If over 21, display "Busted" and then "You Lost!" + "Better Luck Next Time."
+    - If Player's hand is 21, Activate Next Stage (Like "stand")
+    - If Player's hand is 20 or less, show options "hit" or "stand".
+
+<br>
+
+### Dealer's Play (Computer's Moves)
+
+After the player stands or the player's hand is 21, dealer's face-down (hidden) value must be displayed.
+
+If dealer's hand is less than 17, the dealer receives a new card.
+    - while dealer's hand is less than 17
+If dealer's hand is over 17, dealer's hand is concluded.
+If dealer's hand is over 21, dealer lost and player won.
+
+<br>
+
+### Comparing Hands
+
+If player's hand is higher, player wins.
+If dealer's hand is higher, dealer wins.
+If the hands are same, it is a tie.
