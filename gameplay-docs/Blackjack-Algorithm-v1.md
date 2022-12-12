@@ -96,3 +96,15 @@ Just pick first or last cards from the deck of cards.
     - Same steps as above.
 - Pick the second card for the dealer.
     - Same steps as above.
+
+### Displaying Cards
+
+* Display both cards of the player:
+    * `A, 10`, `7, 2`, `9, Q`...
+* Display only one card of the dealer:
+    * `9, *`, `Q, *`, `A, *`...
+
+### Asking Player to Choose Next Move
+
+Options: "hit" or "stand"
+
