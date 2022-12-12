@@ -63,6 +63,8 @@ Use `random.shuffle(deck_of_cards)
 Create a `shuffle_deck()` Function
 - For the Version 1, it should shuffle only once, as the default value.
 
+<br>
+
 ### Dealing the Cards
 
 #### First Alternative (Complete Randomness)
@@ -97,12 +99,16 @@ Just pick first or last cards from the deck of cards.
 - Pick the second card for the dealer.
     - Same steps as above.
 
+<br>
+
 ### Displaying Cards
 
 * Display both cards of the player:
     * `A, 10`, `7, 2`, `9, Q`...
 * Display only one card of the dealer:
     * `9, *`, `Q, *`, `A, *`...
+
+<br>
 
 ### Asking Player to Choose Next Move
 
