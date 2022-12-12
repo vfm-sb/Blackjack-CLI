@@ -48,5 +48,36 @@ Jack of Diamonds, 10 of Spades are equal to 20 (10 + 10).
 <br>
 
 
+### Deal of the Cards
 
+The dealer will deal the cards one by one. One for the player and one for the dealer. Then again one for the player and one for the dealer. Player and the Dealer will have two cards each. The dealer will flip one of his cards, exposing its value as the "dealer's upcard".
 
+<br>
+
+### How The Dealer (Computer) Plays His Hand
+
+The dealer will first flip over the "hole card" to reveal his two-card starting hand. The dealer is then required to play his hand in a very specific way, with no choices allowed.
+
+**He must draw cards until he has a total of 17 or more.** The dealer has no choice in how to play the hand. He must continue taking cards until his total is at least 17. (A slight variation of this rule is discussed below.)
+
+<br>
+
+### Wins, Losses, and Ties
+
+**If you draw a card that makes your hand total go over 21, your hand is a bust. That is an automatic loser.**
+
+Assuming you did not bust, the dealer will play out his hand at the end. **If he busts by going over 21, the player wins.**
+
+If neither you nor the dealer busted, now the dealer will compare his final total to yours.
+
+If his total is higher than yours, you lose the bet, and he will collect your bet and put the chips in his tray.
+
+If your total is higher than his, you win the bet.
+
+if you and the dealer have the same exact total, it is a tie. **A tie is called a "push", and you do not win or lose**.
+
+<br>
+
+### Player Choices
+
+The decision a player must make during the game is whether to draw another card to the hand ("hit"), or stop at the current total ("stand").
