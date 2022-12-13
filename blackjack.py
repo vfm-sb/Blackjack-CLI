@@ -54,20 +54,11 @@ def busted(hand: list) -> bool:
 def display_card(card: str) -> None:
     print(f"New Card is {card}")
 
-def display_hand(hand: list, has_facedown_card: bool = False) -> None:
+def repr_hand(hand: list, has_facedown_card: bool = False) -> None:
     hand_copy = hand.copy()
     if has_facedown_card:
         hand_copy[0] = "*"
-    print(
-        f'{"Dealer" if has_facedown_card else "Your"} Hand: '
-        f'{", ".join(hand_copy)}'
-    )
-
-def display_endgame(player_hand: list, dealer_hand: list):
-    print("Your Hand was: ", end="")
-    display_hand(player_hand)
-    print("Dealer's Hand was: ", end="")
-    display_hand(dealer_hand)
+    return ", ".join(hand_copy)
 
 def blackjack():
     playing_cards = deck_of_cards()
@@ -82,23 +73,29 @@ def blackjack():
     # while not busted() or "stand", ask player to "hit" or "stand"
     while True:
         # display initial hands
-        display_hand(hand=player_hand)
-        display_hand(hand=dealer_hand, has_facedown_card=True)
-        print()
+        print("Your Hand is:\n", repr_hand(player_hand))
+        print("Dealer's Hand is:\n", repr_hand(dealer_hand, has_facedown_card=True))
         # ask player next move
+        print("\nWhat's Your Next Move?", end=" ")
         player_choice = input('"hit" or "stand"?\n')
         if player_choice == "hit":
             card = deal_card(playing_cards)
             display_card(card)
             player_hand.append(card)
         elif player_choice == "stand":
+            print()
             break
         # if player's hand is over 21, end of game
         if busted(player_hand):
-            print("Busted! Your Hand is Over 21.")
-            print("You Lost!")
-            display_endgame(player_hand, dealer_hand)
-            break
+            print("Busted! Your Hand is Over 21. You Lost!")
+            print("Final Hands:")
+            print("Your Hand was:\n", repr_hand(player_hand))
+            print("Dealer's Hand was:\n", repr_hand(dealer_hand, has_facedown_card=False))
+            return
+        print()
+    # display dealer's full hand
+    print(f"Dealer's Open Hand is:\n", repr_hand(dealer_hand, has_facedown_card=False))
+    # dealer's play
     
 
 
