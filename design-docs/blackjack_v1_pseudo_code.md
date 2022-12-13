@@ -42,9 +42,9 @@ finalizing player_hand
             - player_hand.append(deal_card())
         - elif "stand":
             - break
+        - if busted():
+            - print("Busted...")
+            - display player_hand
+            - display dealer_hand
 
-checking if player is busted()
-    - if busted():
-        - print("Busted!")
-        - print("You Lost!")
 
