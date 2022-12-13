@@ -79,9 +79,9 @@ def blackjack():
         print("\nWhat's Your Next Move?", end=" ")
         player_choice = input('"hit" or "stand"?\n')
         if player_choice == "hit":
-            card = deal_card(playing_cards)
-            display_card(card)
-            player_hand.append(card)
+            new_card = deal_card(playing_cards)
+            display_card(new_card)
+            player_hand.append(new_card)
         elif player_choice == "stand":
             print()
             break
@@ -90,13 +90,36 @@ def blackjack():
             print("Busted! Your Hand is Over 21. You Lost!")
             print("Final Hands:")
             print("Your Hand was:\n", repr_hand(player_hand))
-            print("Dealer's Hand was:\n", repr_hand(dealer_hand, has_facedown_card=False))
+            print("Dealer's Hand was:\n", repr_hand(dealer_hand))
             return
         print()
     # display dealer's full hand
-    print(f"Dealer's Open Hand is:\n", repr_hand(dealer_hand, has_facedown_card=False))
-    # dealer's play
-    
+    print(f"Dealer's Open Hand is:\n", repr_hand(dealer_hand))
+    # dealer's play: dealer must hit if hand is less 17
+    while calculate_hand(dealer_hand) < 17:
+        new_card = deal_card(dealer_hand)
+        display_card(new_card)
+        dealer_hand.append(new_card)
+        # if dealer's hand is over 21, end of game
+        if busted(dealer_hand):
+            print("Busted! Dealer's Hand is Over 21. You Won!")
+            print("Final Hands:")
+            print("Your Hand was:\n", repr_hand(player_hand))
+            print("Dealer's Hand was:\n", repr_hand(dealer_hand))
+            return
+    # display final hands
+    print()
+    print("Final Hands:")
+    print("Your Final Hand was:\n", repr_hand(player_hand))
+    print("Dealer's Final Hand was:\n", repr_hand(dealer_hand))
+    print()
+    if calculate_hand(player_hand) > calculate_hand(dealer_hand):
+        print("Your Hand is Higher, You Won!")
+    elif calculate_hand(dealer_hand) > calculate_hand(player_hand):
+        print("Dealer's Hand is Higher, You Lost!")
+    else:
+        print("Both Hands are the Same! It's a Tie.")
+    return
 
 
 def main():
@@ -104,21 +127,3 @@ def main():
 
 
 main()
-
-
-# Testing
-if __name__ == "__main__":
-    pass
-    # playing_cards = deck_of_cards()
-    # shuffle_cards(playing_cards)
-    # # deal initial hands
-    # player_hand = []
-    # dealer_hand = []
-    # for _ in range(2):
-    #     player_hand.append(deal_card(playing_cards))
-    #     dealer_hand.append(deal_card(playing_cards))
-    # display_hand(player_hand)
-    # display_hand(dealer_hand, is_dealer=True)
-    # print()
-    
-    

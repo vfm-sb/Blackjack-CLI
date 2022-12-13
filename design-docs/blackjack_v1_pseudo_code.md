@@ -43,8 +43,15 @@ finalizing player_hand
         - elif "stand":
             - break
         - if busted():
-            - print("Busted...")
-            - display player_hand
-            - display dealer_hand
+            - End of Game
 
+display player_hand
+display dealer_hand
 
+dealer's play
+    - while while dealer_hand is less 17:
+        - dealer must hit
+        - if busted():
+            - End of Game
+
+display final hands
