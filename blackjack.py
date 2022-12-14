@@ -51,9 +51,6 @@ def calculate_hand(hand: list) -> int:
 def busted(hand: list) -> bool:
     return True if calculate_hand(hand) > 21 else False
 
-def display_card(card: str) -> None:
-    print(f"New Card is {card}")
-
 def repr_hand(hand: list, has_facedown_card: bool = False) -> str:
     hand_copy = hand.copy()
     if has_facedown_card:
@@ -80,7 +77,7 @@ def blackjack():
         player_choice = input('"hit" or "stand"?\n')
         if player_choice == "hit":
             new_card = deal_card(playing_cards)
-            display_card(new_card)
+            print(f"New Card is {new_card}")
             player_hand.append(new_card)
         elif player_choice == "stand":
             break
@@ -98,7 +95,7 @@ def blackjack():
     # dealer's play: dealer must hit if hand is less 17
     while calculate_hand(dealer_hand) < 17:
         new_card = deal_card(playing_cards)
-        display_card(new_card)
+        print(f"New Card is {new_card}")
         dealer_hand.append(new_card)
         # if dealer's hand is over 21, end of game
         if busted(dealer_hand):
