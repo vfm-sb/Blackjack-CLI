@@ -19,29 +19,52 @@ CARD_SUIT = {
 }
 
 def deck_of_cards(decks: int = 1) -> list[str]:
+    """Generates and Returns Desired Number of Card Decks
+    > One Deck Contains 4 Card Suits
+    Argument:
+        decks (int): Number of Card Decks [default=1]
+    Returns:
+        playing_cards (list[str]): List of Cards Decks
+    """
     playing_cards = []
     for _ in range(decks * 4):
         playing_cards.extend(CARD_SUIT.keys())
     return playing_cards
 
-def shuffle_cards(playing_cards: list, shuffles: int = 1) -> None:
+def shuffle_cards(playing_cards: list[str], shuffles: int = 1) -> None:
+    """Shuffles Given Card Decks in Desired Times
+    Arguments:
+        playing_cards (list[str]): A List of Game Cards
+        shuffles (int): Number of Shuffles for Randomness
+    Returns:
+        None
+    """
     for _ in range(shuffles):
         shuffle(playing_cards)
 
-def deal_card(playing_cards: list) -> str:
+def deal_card(playing_cards: list[str]) -> str:
+    """Retrives and then Removes Last Card of the Playing Cards
+    Returns:
+        playing_cards[-1] (str)
+    """
     return playing_cards.pop(-1)
 
 def card_value(card: str) -> int:
+    """Retrieves and Returns The Card's Value from the CARD_SUIT"""
     return CARD_SUIT[card]
 
-def calculate_hand(hand: list) -> int:
+def calculate_hand(hand: list[str]) -> int:
+    """Calculates and Returns Given Hand's Total"""
     sum_of_hand = 0
     for card in hand:
         if card == "A":
             continue
         sum_of_hand += card_value(card)
     if "A" in hand:
+        # determine number of Aces in the hand
         aces_count = hand.count("A")
+        # while soft hand, an Ace counts as 11,
+        # otherwise, in a hard hand, an Ace's value is 1
         while sum_of_hand + 11 + (aces_count - 1) <= 21:
             sum_of_hand += 11
             aces_count -= 1
@@ -49,15 +72,24 @@ def calculate_hand(hand: list) -> int:
     return sum_of_hand
 
 def busted(hand: list) -> bool:
+    """Checks If The Hand Exceeds 21 or Not
+    Returns:
+        True (bool), if hand is over 21
+        False (bool), if hand is 21 or less
+    """
     return True if calculate_hand(hand) > 21 else False
 
 def repr_hand(hand: list, has_facedown_card: bool = False) -> str:
+    """Represents (Returns) The Hand of the Participant
+    > If Participant is the Dealer, The First Card will be Hidden!
+    """
     hand_copy = hand.copy()
     if has_facedown_card:
         hand_copy[0] = "*"
     return ", ".join(hand_copy)
 
 def blackjack():
+    """Blackjack Game Function"""
     playing_cards = deck_of_cards()
     shuffle_cards(playing_cards)
     # deal initial hands
