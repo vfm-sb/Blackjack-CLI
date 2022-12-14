@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "0.1.0"
+__version__ = "0.1.2"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -18,18 +18,18 @@ CARD_SUIT = {
     "A": 11
 }
 
-def deck_of_cards(decks: int = 1) -> list:
+def deck_of_cards(decks: int = 1) -> list[str]:
     playing_cards = []
     for _ in range(decks * 4):
         playing_cards.extend(CARD_SUIT.keys())
     return playing_cards
 
-def shuffle_cards(deck_of_cards: list, shuffles: int = 1) -> None:
+def shuffle_cards(playing_cards: list, shuffles: int = 1) -> None:
     for _ in range(shuffles):
-        shuffle(deck_of_cards)
+        shuffle(playing_cards)
 
-def deal_card(deck_of_cards: list) -> str:
-    return deck_of_cards.pop(-1)
+def deal_card(playing_cards: list) -> str:
+    return playing_cards.pop(-1)
 
 def card_value(card: str) -> int:
     return CARD_SUIT[card]
@@ -54,7 +54,7 @@ def busted(hand: list) -> bool:
 def display_card(card: str) -> None:
     print(f"New Card is {card}")
 
-def repr_hand(hand: list, has_facedown_card: bool = False) -> None:
+def repr_hand(hand: list, has_facedown_card: bool = False) -> str:
     hand_copy = hand.copy()
     if has_facedown_card:
         hand_copy[0] = "*"
@@ -83,27 +83,27 @@ def blackjack():
             display_card(new_card)
             player_hand.append(new_card)
         elif player_choice == "stand":
-            print()
             break
         # if player's hand is over 21, end of game
         if busted(player_hand):
             print("Busted! Your Hand is Over 21. You Lost!")
-            print("Final Hands:")
+            print("\nFinal Hands:")
             print("Your Hand was:\n", repr_hand(player_hand))
             print("Dealer's Hand was:\n", repr_hand(dealer_hand))
             return
         print()
+    print()
     # display dealer's full hand
-    print(f"Dealer's Open Hand is:\n", repr_hand(dealer_hand))
+    print("Dealer's Open Hand is:\n", repr_hand(dealer_hand))
     # dealer's play: dealer must hit if hand is less 17
     while calculate_hand(dealer_hand) < 17:
-        new_card = deal_card(dealer_hand)
+        new_card = deal_card(playing_cards)
         display_card(new_card)
         dealer_hand.append(new_card)
         # if dealer's hand is over 21, end of game
         if busted(dealer_hand):
             print("Busted! Dealer's Hand is Over 21. You Won!")
-            print("Final Hands:")
+            print("\nFinal Hands:")
             print("Your Hand was:\n", repr_hand(player_hand))
             print("Dealer's Hand was:\n", repr_hand(dealer_hand))
             return
