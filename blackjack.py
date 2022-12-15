@@ -4,11 +4,12 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "0.1.2"
+__version__ = "0.2.0"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
 from random import shuffle # Built-in Methods
+from os import system
 
 
 # Global Variables
@@ -152,7 +153,14 @@ def blackjack():
 
 
 def main():
-    blackjack()
+    while True:
+        system("clear")
+        with open("blackjack_logo.txt", "r", encoding="utf-8") as blackjack_logo:
+            print(blackjack_logo.read())
+        blackjack()
+        print()
+        if input("Do Want to Play Again? (yes or no)?\n") == "no":
+            break
 
 
 main()
