@@ -47,10 +47,15 @@ Jack of Diamonds, 10 of Spades are equal to 20 (10 + 10).
 
 <br>
 
-
 ### Deal of the Cards
 
 The dealer will deal the cards one by one. One for the player and one for the dealer. Then again one for the player and one for the dealer. Player and the Dealer will have two cards each. The dealer will flip one of his cards, exposing its value as the "dealer's upcard".
+
+<br>
+
+### Player Choices
+
+The decision a player must make during the game is whether to draw another card to the hand ("hit"), or stop at the current total ("stand").
 
 <br>
 
@@ -75,9 +80,3 @@ If his total is higher than yours, you lose the bet, and he will collect your be
 If your total is higher than his, you win the bet.
 
 if you and the dealer have the same exact total, it is a tie. **A tie is called a "push", and you do not win or lose**.
-
-<br>
-
-### Player Choices
-
-The decision a player must make during the game is whether to draw another card to the hand ("hit"), or stop at the current total ("stand").
