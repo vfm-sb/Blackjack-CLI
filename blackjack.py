@@ -92,6 +92,7 @@ def busted(hand: list[str]) -> bool:
     return True if calculate_hand(hand) > 21 else False
 
 def repr_card(card: list[str]) -> str:
+    """Represents (Returns) a Card of the Deck"""
     return card[0] + card[1]
 
 def repr_hand(hand: list[list], has_facedown_card: bool = False) -> str:
