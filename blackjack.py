@@ -18,18 +18,29 @@ CARD_SUIT = {
     "10": 10, "J": 10, "Q": 10, "K": 10,
     "A": 11
 }
+SUITS = {
+    "clubs": "♣︎",
+    "diamonds": "♦",
+    "hearts": "♥",
+    "spades": "♠"
+}
 
-def deck_of_cards(decks: int = 1) -> list[str]:
+def deck_of_cards(decks: int = 1) -> list[list[str, str]]:
     """Generates and Returns Desired Number of Card Decks
     > One Deck Contains 4 Card Suits
     Argument:
         decks (int): Number of Card Decks [default=1]
     Returns:
-        playing_cards (list[str]): List of Cards Decks
+        playing_cards (list[list[str, str]]): List of Cards Decks
     """
     playing_cards = []
-    for _ in range(decks * 4):
-        playing_cards.extend(CARD_SUIT.keys())
+    for symbol in SUITS.values():
+        for card in CARD_SUIT:
+            playing_cards.append([card, symbol])
+    if decks > 1:
+        _playing_cards = playing_cards.copy()
+        for _ in range(decks - 1):
+            playing_cards.extend(_playing_cards)
     return playing_cards
 
 def shuffle_cards(playing_cards: list[str], shuffles: int = 1) -> None:
@@ -163,4 +174,21 @@ def main():
             break
 
 
-main()
+# main()
+
+
+# Testing
+if __name__ == "__main__":
+    def deck_of_cards_printer(deck_of_cards: list) -> None:
+        for index, card_container in enumerate(deck_of_cards, start=1):
+            if index == len(deck_of_cards):
+                print(card_container[0]+card_container[1])
+            elif index % 13 == 0:
+                print(card_container[0]+card_container[1], end=",\n")
+            else:
+                print(card_container[0]+card_container[1], end=", ")
+    deck_of_cards = deck_of_cards(decks=2)
+    deck_of_cards_printer(deck_of_cards)
+    shuffle_cards(deck_of_cards)
+    print("\nShuffled Cards:")
+    deck_of_cards_printer(deck_of_cards)
