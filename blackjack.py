@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "1.0.0"
+__version__ = "1.0.1"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -178,17 +178,17 @@ def main():
 
 
 # Testing
-if __name__ == "__main__":
-    def deck_of_cards_printer(deck_of_cards: list) -> None:
-        for index, card_container in enumerate(deck_of_cards, start=1):
-            if index == len(deck_of_cards):
-                print(card_container[0]+card_container[1])
-            elif index % 13 == 0:
-                print(card_container[0]+card_container[1], end=",\n")
-            else:
-                print(card_container[0]+card_container[1], end=", ")
-    deck_of_cards = deck_of_cards(decks=2)
-    deck_of_cards_printer(deck_of_cards)
-    shuffle_cards(deck_of_cards)
-    print("\nShuffled Cards:")
-    deck_of_cards_printer(deck_of_cards)
+# if __name__ == "__main__":
+#     def deck_of_cards_printer(deck_of_cards: list) -> None:
+#         for index, card_container in enumerate(deck_of_cards, start=1):
+#             if index == len(deck_of_cards):
+#                 print(card_container[0]+card_container[1])
+#             elif index % 13 == 0:
+#                 print(card_container[0]+card_container[1], end=",\n")
+#             else:
+#                 print(card_container[0]+card_container[1], end=", ")
+#     deck_of_cards = deck_of_cards(decks=2)
+#     deck_of_cards_printer(deck_of_cards)
+#     shuffle_cards(deck_of_cards)
+#     print("\nShuffled Cards:")
+#     deck_of_cards_printer(deck_of_cards)
