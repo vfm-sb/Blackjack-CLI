@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "1.0.1"
+__version__ = "1.0.2"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -61,7 +61,7 @@ def deal_card(playing_cards: list[str]) -> str:
     """
     return playing_cards.pop(-1)
 
-def card_value(card: str) -> int:
+def card_value(card: list[str]) -> int:
     """Retrieves and Returns The Card's Value from the CARD_SUIT"""
     return CARD_SUIT[card[0]]
 
@@ -73,7 +73,7 @@ def calculate_hand(hand: list[list]) -> int:
         if card[0] == "A":
             aces_count += 1
             continue
-        sum_of_hand += card_value(card[0])
+        sum_of_hand += card_value(card)
     if aces_count > 0:
         # while soft hand, an Ace counts as 11,
         # otherwise, in a hard hand, an Ace's value is 1
@@ -83,7 +83,7 @@ def calculate_hand(hand: list[list]) -> int:
         sum_of_hand += aces_count
     return sum_of_hand
 
-def busted(hand: list) -> bool:
+def busted(hand: list[str]) -> bool:
     """Checks If The Hand Exceeds 21 or Not
     Returns:
         True (bool), if hand is over 21
@@ -91,13 +91,16 @@ def busted(hand: list) -> bool:
     """
     return True if calculate_hand(hand) > 21 else False
 
+def repr_card(card: list[str]) -> str:
+    return card[0] + card[1]
+
 def repr_hand(hand: list[list], has_facedown_card: bool = False) -> str:
     """Represents (Returns) The Hand of the Participant
     > If Participant is the Dealer, The First Card will be Hidden!
     """
     hand_copy = []
     for card in hand:
-        hand_copy.append(card[0] + card[1])
+        hand_copy.append(repr_card(card))
     if has_facedown_card:
         hand_copy[0] = "*"
     return ", ".join(hand_copy)
@@ -123,7 +126,7 @@ def blackjack():
         player_choice = input('"hit" or "stand"?\n')
         if player_choice == "hit":
             new_card = deal_card(playing_cards)
-            print(f"New Card is {new_card}")
+            print(f"New Card is {repr_card(new_card)}")
             player_hand.append(new_card)
         elif player_choice == "stand":
             break
@@ -141,7 +144,7 @@ def blackjack():
     # dealer's play: dealer must hit if hand is less 17
     while calculate_hand(dealer_hand) < 17:
         new_card = deal_card(playing_cards)
-        print(f"New Card is {new_card}")
+        print(f"New Card is {repr_card(new_card)}")
         dealer_hand.append(new_card)
         # if dealer's hand is over 21, end of game
         if busted(dealer_hand):
