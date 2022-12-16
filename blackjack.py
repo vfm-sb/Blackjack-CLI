@@ -63,18 +63,18 @@ def deal_card(playing_cards: list[str]) -> str:
 
 def card_value(card: str) -> int:
     """Retrieves and Returns The Card's Value from the CARD_SUIT"""
-    return CARD_SUIT[card]
+    return CARD_SUIT[card[0]]
 
-def calculate_hand(hand: list[str]) -> int:
+def calculate_hand(hand: list[list]) -> int:
     """Calculates and Returns Given Hand's Total"""
     sum_of_hand = 0
+    aces_count = 0
     for card in hand:
-        if card == "A":
+        if card[0] == "A":
+            aces_count += 1
             continue
-        sum_of_hand += card_value(card)
-    if "A" in hand:
-        # determine number of Aces in the hand
-        aces_count = hand.count("A")
+        sum_of_hand += card_value(card[0])
+    if aces_count > 0:
         # while soft hand, an Ace counts as 11,
         # otherwise, in a hard hand, an Ace's value is 1
         while sum_of_hand + 11 + (aces_count - 1) <= 21:
@@ -91,11 +91,13 @@ def busted(hand: list) -> bool:
     """
     return True if calculate_hand(hand) > 21 else False
 
-def repr_hand(hand: list, has_facedown_card: bool = False) -> str:
+def repr_hand(hand: list[list], has_facedown_card: bool = False) -> str:
     """Represents (Returns) The Hand of the Participant
     > If Participant is the Dealer, The First Card will be Hidden!
     """
-    hand_copy = hand.copy()
+    hand_copy = []
+    for card in hand:
+        hand_copy.append(card[0] + card[1])
     if has_facedown_card:
         hand_copy[0] = "*"
     return ", ".join(hand_copy)
@@ -174,7 +176,7 @@ def main():
             break
 
 
-# main()
+main()
 
 
 # Testing
