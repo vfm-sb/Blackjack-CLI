@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "1.0.2"
+__version__ = "2.0.0"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
