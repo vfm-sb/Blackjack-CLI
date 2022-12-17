@@ -30,12 +30,7 @@ def make_card(card: list[str]):
     card_model.append("└───────────┘")
     # replace '#' in card_model[1] and card_model[-1]
     if card[0] != "10":
-        card_model[1] = bulk_replacer(string=card_model[1], new_string=card[0], indexes=[3, 9])
-        card_model[-2] = bulk_replacer(string=card_model[-2], new_string=card[0], indexes=[3, 9])
-    else:
-        card_model[1] = bulk_replacer(string=card_model[1], new_string=card[0], indexes=[2, 9])
-        card_model[-2] = bulk_replacer(string=card_model[-2], new_string=card[0], indexes=[2, 9])
-    return card_model
+        pass
 
 def display_hand(hand: list[str]):
     pass
