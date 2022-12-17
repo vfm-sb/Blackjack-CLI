@@ -25,12 +25,13 @@ def make_card(card: list[str]) -> list:
     return card_model
 
 def display_card(card: list[str]) -> None:
-    pass
+    print("\n".join(make_card(card)))
 
 def display_hand(hand: list[str]):
     pass
 
 if __name__ == "__main__":
     example_card = ["10", "♥"]
-    demo = "\n".join(make_card(example_card))
-    print(demo)
+    display_card(example_card)
+    another_example = ["K", "♠"]
+    display_card(another_example)
