@@ -28,10 +28,13 @@ def display_card(card: list[str]) -> None:
     print("\n".join(make_card(card)))
 
 def display_hand(hand: list[str]):
-    pass
+    print('\n'.join(map('   '.join, zip(*(make_card(card) for card in hand)))))
 
 if __name__ == "__main__":
-    example_card = ["10", "♥"]
-    display_card(example_card)
-    another_example = ["K", "♠"]
-    display_card(another_example)
+    # example_card = ["10", "♥"]
+    # display_card(example_card)
+    # another_example = ["K", "♠"]
+    # display_card(another_example)
+    example_hand = [["5", "♦"], ["10", "♣"], ["K", "♥"]]
+    display_hand(example_hand)
+    
