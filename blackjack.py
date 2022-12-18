@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "2.0.2"
+__version__ = "2.0.3"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -92,21 +92,6 @@ def busted(hand: list[str]) -> bool:
         False (bool), if hand is 21 or less
     """
     return True if calculate_hand(hand) > 21 else False
-
-def repr_card(card: list[str]) -> str:
-    """Represents (Returns) a Card of the Deck"""
-    return card[0] + card[1]
-
-def repr_hand(hand: list[list], has_facedown_card: bool = False) -> str:
-    """Represents (Returns) The Hand of the Participant
-    > If Participant is the Dealer, The First Card will be Hidden!
-    """
-    hand_copy = []
-    for card in hand:
-        hand_copy.append(repr_card(card))
-    if has_facedown_card:
-        hand_copy[0] = ["*", "*"]
-    return hand_copy
 
 def make_card(card: list[str]) -> list:
     card_model = []
