@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "2.0.4"
+__version__ = "2.0.5"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -91,7 +91,7 @@ def busted(hand: list) -> bool:
         True (bool), if hand is over 21
         False (bool), if hand is 21 or less
     """
-    return True if calculate_hand(hand) > 21 else False
+    return calculate_hand(hand) > 21
 
 def make_card(card: list[str, str]) -> list[str]:
     """Generates CLI Template of a Card"""
