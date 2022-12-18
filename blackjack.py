@@ -4,7 +4,7 @@ __author__ = "VFM | SB"
 __email__ = "vfm_sb@proton.me"
 __copyright__ = "Copyright 2022"
 __license__ = "MIT"
-__version__ = "2.0.0"
+__version__ = "2.0.2"
 __maintainer__ = "VFM | SB"
 __status__ = "Development"
 
@@ -25,6 +25,8 @@ SUITS = {
     "spades": "♠"
 }
 
+
+# Functions
 def deck_of_cards(decks: int = 1) -> list[list[str, str]]:
     """Generates and Returns Desired Number of Card Decks
     > One Deck Contains 4 Card Suits
@@ -103,8 +105,41 @@ def repr_hand(hand: list[list], has_facedown_card: bool = False) -> str:
     for card in hand:
         hand_copy.append(repr_card(card))
     if has_facedown_card:
-        hand_copy[0] = "*"
-    return ", ".join(hand_copy)
+        hand_copy[0] = ["*", "*"]
+    return hand_copy
+
+def make_card(card: list[str]) -> list:
+    card_model = []
+    card_model.append("┌───────────┐") # Top
+    card_model.append("│           │") # Face: [3] or [2],[3], and [-3] or [-2],[-3]
+    card_model.append("│           │") # Suit: [3] and [3]
+    card_model.append("│           │") # Empty
+    card_model.append("│           │") # Suit: [7]
+    card_model.append("│           │") # Empty
+    card_model.append("│           │") # Suit: [3] and [3]
+    card_model.append("│           │") # Face: [3] or [2],[3], and [-3] or [-2],[-3]
+    card_model.append("└───────────┘")
+    # inject card face
+    if card[0] != "10":
+        card_model[1] = f"│  {card[0]}     {card[0]}  │"
+        card_model[-2] = f"│  {card[0]}     {card[0]}  │"
+    else:
+        card_model[1] = f"│ {card[0]}     {card[0]} │"
+        card_model[-2] = f"│ {card[0]}     {card[0]} │"
+    # inject suit symbol
+    card_model[2] = f"│  {card[1]}     {card[1]}  │"
+    card_model[4] = f"│     {card[1]}     │"
+    card_model[-3] = f"│  {card[1]}     {card[1]}  │"
+    return card_model
+
+def display_card(card: list[str]) -> None:
+    return "\n".join(make_card(card))
+
+def display_hand(hand: list[str], has_facedown_card: bool = False) -> None:
+    hand_copy = hand.copy()
+    if has_facedown_card:
+        hand_copy[0] = ["*", "*"]
+    return '\n'.join(map('   '.join, zip(*(make_card(card) for card in hand_copy))))
 
 def blackjack():
     """Blackjack Game Function"""
@@ -120,14 +155,15 @@ def blackjack():
     # while not busted() or "stand", ask player to "hit" or "stand"
     while True:
         # display initial hands
-        print("Your Hand is:\n", repr_hand(player_hand))
-        print("Dealer's Hand is:\n", repr_hand(dealer_hand, has_facedown_card=True))
+        print("Your Hand is:\n", display_hand(player_hand), sep="")
+        print("Dealer's Hand is:\n", display_hand(dealer_hand, has_facedown_card=True), sep="")
         # ask player next move
         print("\nWhat's Your Next Move?", end=" ")
         player_choice = input('"hit" or "stand"?\n')
         if player_choice == "hit":
             new_card = deal_card(playing_cards)
-            print(f"New Card is {repr_card(new_card)}")
+            print("New Card is:")
+            print(display_card(new_card))
             player_hand.append(new_card)
         elif player_choice == "stand":
             break
@@ -135,8 +171,8 @@ def blackjack():
         if busted(player_hand):
             print("Busted! Your Hand is Over 21. You Lost!")
             print("\nFinal Hands:")
-            print("Your Hand was:\n", repr_hand(player_hand))
-            print("Dealer's Hand was:\n", repr_hand(dealer_hand))
+            print("Your Hand was:\n", display_hand(player_hand), sep="")
+            print("Dealer's Hand was:\n", display_hand(dealer_hand), sep="")
             return
         print()
     print()
@@ -145,20 +181,21 @@ def blackjack():
     # dealer's play: dealer must hit if hand is less 17
     while calculate_hand(dealer_hand) < 17:
         new_card = deal_card(playing_cards)
-        print(f"New Card is {repr_card(new_card)}")
+        print("New Card is:")
+        print(display_card(new_card))
         dealer_hand.append(new_card)
         # if dealer's hand is over 21, end of game
         if busted(dealer_hand):
             print("Busted! Dealer's Hand is Over 21. You Won!")
             print("\nFinal Hands:")
-            print("Your Hand was:\n", repr_hand(player_hand))
-            print("Dealer's Hand was:\n", repr_hand(dealer_hand))
+            print("Your Hand was:\n", display_hand(player_hand), sep="")
+            print("Dealer's Hand was:\n", display_hand(dealer_hand), sep="")
             return
     # display final hands
     print()
     print("Final Hands:")
-    print("Your Final Hand was:\n", repr_hand(player_hand))
-    print("Dealer's Final Hand was:\n", repr_hand(dealer_hand))
+    print("Your Final Hand was:\n", display_hand(player_hand), sep="")
+    print("Dealer's Final Hand was:\n", display_hand(dealer_hand), sep="")
     print()
     if calculate_hand(player_hand) > calculate_hand(dealer_hand):
         print("Your Hand is Higher, You Won!")
@@ -182,19 +219,3 @@ def main():
 
 main()
 
-
-# Testing
-# if __name__ == "__main__":
-#     def deck_of_cards_printer(deck_of_cards: list) -> None:
-#         for index, card_container in enumerate(deck_of_cards, start=1):
-#             if index == len(deck_of_cards):
-#                 print(card_container[0]+card_container[1])
-#             elif index % 13 == 0:
-#                 print(card_container[0]+card_container[1], end=",\n")
-#             else:
-#                 print(card_container[0]+card_container[1], end=", ")
-#     deck_of_cards = deck_of_cards(decks=2)
-#     deck_of_cards_printer(deck_of_cards)
-#     shuffle_cards(deck_of_cards)
-#     print("\nShuffled Cards:")
-#     deck_of_cards_printer(deck_of_cards)
